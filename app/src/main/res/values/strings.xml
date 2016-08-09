@@ -1,4 +1,8 @@
 <resources>
-    <string name="app_name">SNF</string>
+    <string name="app_name">Search &amp; Found</string>
     <string name="action_settings">Settings</string>
+    <string name="slogan">Überleg dir was bitte!</string>
+    <string name="emaileingabe">Gebe deine E-Mail Adresse ein, um dich anzumelden oder zu registrieren!</string>
+    <string name="main_weiter_button">Weiter</string>
+    <string name="main_hint">Deine E-Mail Adresse</string>
 </resources>
