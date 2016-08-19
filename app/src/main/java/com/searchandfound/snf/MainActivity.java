@@ -1,5 +1,6 @@
 package com.searchandfound.snf;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -38,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
         emailEnter = (EditText) findViewById(R.id.main_email);
         emailProgress = (ProgressBar)findViewById(R.id.main_progressBar);
         emailProgress.setVisibility(View.GONE);

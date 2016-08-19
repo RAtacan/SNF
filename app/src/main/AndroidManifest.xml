@@ -35,8 +35,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CheckState"></activity>
-        <activity android:name=".Homescreen"></activity>
+        <activity android:name=".CheckState" />
+        <activity android:name=".Homescreen" />
     </application>
 
 </manifest>

@@ -61,7 +61,7 @@
         android:layout_marginTop="15dp"
         android:layout_height="60dp"
         android:layout_width="220dp"
-        android:text="\@string/createaccount" />
+        android:text="@string/createaccount" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -71,7 +71,7 @@
         android:layout_marginTop="25dp"
         android:id="@+id/postal"
         android:textAlignment="center"
-        android:hint="\@string/postal"
+        android:hint="@string/postal"
         android:layout_below="@+id/main_ueberschrift"
         android:layout_centerHorizontal="true"
         android:background="#FFFF" />
