@@ -11,18 +11,10 @@
     <string name="main_checkConnect">Bitte prüfen Sie ihre Internetverbindung</string>
     <string name="main_checkInput">Bitte eine gültige Email-Adresse eingeben!</string>
 
+    <!-- Login und registrieren -->
     <string name="password">Passwort</string>
     <string name="createaccount">Account erstellen</string>
     <string name="login">Login</string>
     <string name="postal">Deine PLZ</string>
-    <string name="title_activity_navi_homescreen">NaviHomescreen</string>
-
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_example">Example action</string>
+    <string name="nopw">Bitte ein Passwort eingeben</string>
 </resources>

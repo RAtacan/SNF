@@ -2,10 +2,7 @@ package com.searchandfound.snf;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,19 +11,18 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.searchandfound.snf.Models.EmailRequest;
+import com.searchandfound.snf.Models.EmailResponse;
 import com.searchandfound.snf.Utils.APIBuilder;
 import com.searchandfound.snf.Utils.Helper;
+
+import org.apache.http.conn.ConnectTimeoutException;
 
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
-
-import retrofit.Call;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -90,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v == next.findViewById(R.id.main_weiterbutton)){
 
             if(!this.emailEnter.getText().toString().equals(null) && this.emailEnter.getText().toString().trim().contains("@")){
-
+                emailProgress.setVisibility(View.VISIBLE);
                 checkEmailExisting(this.emailEnter.getText().toString().trim());
 
             }else{
@@ -99,30 +95,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
 
-
-
-
-            Intent next = new Intent(MainActivity.this,CheckState.class);
-            startActivity(next);
         }
     }
     public void checkEmailExisting(String email){
 
-        String mail = email;
+        final String mail = email;
 
-        Call<EmailRequest> call = (Call) APIBuilder.getInstance().getService().checkMail(mail);
-        call.enqueue(new Callback<EmailRequest>() {
+        Call<EmailResponse> call = (Call) APIBuilder.getInstance().getService().checkMail(mail);
+        call.enqueue(new Callback<EmailResponse>() {
             @Override
-            public void onResponse(Response<EmailRequest> response, Retrofit retrofit) {
+            public void onResponse(Response<EmailResponse> response, Retrofit retrofit) {
 
-                
+                if(response.code() == 200){
+                    MainActivity.this.emailProgress.setVisibility(View.GONE);
+                    Intent intent = new Intent(MainActivity.this,CheckState.class);
+                    intent.putExtra("checkedEmail",mail);
+                }else{
+
+                    MainActivity.this.emailProgress.setVisibility(View.GONE);
+                    Intent intent = new Intent(MainActivity.this,CheckState.class);
+                    intent.putExtra("unregisteredMail",mail);
+
+                }
 
             }
 
             @Override
             public void onFailure(Throwable t) {
 
-
+                Toast.makeText(MainActivity.this,"Please check Internet Connection or Server is down",Toast.LENGTH_SHORT);
 
             }
         });
