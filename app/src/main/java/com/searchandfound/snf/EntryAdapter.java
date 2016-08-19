@@ -15,19 +15,18 @@ import java.util.List;
  */
 public class EntryAdapter extends BaseAdapter {
 
-    private List<Entry> data;
-
-    public EntryAdapter(List<Entry> data){
-        this.data = data;
+    EntryDB db;
+    public EntryAdapter(EntryDB db){
+        this.db = db;
     }
     @Override
     public int getCount() {
-        return data.size();
+        return db.getEntryNames().length;
     }
 
     @Override
     public Object getItem(int position) {
-        return data.get(position);
+        return db.getEntryNames()[position];
     }
 
     @Override
@@ -39,8 +38,7 @@ public class EntryAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         Context context = parent.getContext();
-        Entry entry = data.get(position);
-
+        String entryName = db.getEntryNames()[position];
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View root = convertView;
@@ -52,7 +50,7 @@ public class EntryAdapter extends BaseAdapter {
         cb.setImageResource(context.getResources().getIdentifier("bckgrnd", "drawable", context.getPackageName()));
 
         TextView tw = (TextView) root.findViewById(R.id.item_description);
-        tw.setText("Dummy");
+        tw.setText(entryName);
 
         return root;
     }
