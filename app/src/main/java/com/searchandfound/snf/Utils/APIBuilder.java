@@ -22,8 +22,8 @@ public class APIBuilder {
 
 
 
-    private static final String PRODUCTION_SCHEMA = "https";
-    private static final String PRODUCTION_HOST = "HIER KOMMT SERVER ADRESSE";
+    private static final String PRODUCTION_SCHEMA = "http";
+    private static final String PRODUCTION_HOST = "snfandroid.comli.com";
 
 
 

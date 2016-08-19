@@ -11,8 +11,10 @@
     <string name="main_checkConnect">Bitte prüfen Sie ihre Internetverbindung</string>
     <string name="main_checkInput">Bitte eine gültige Email-Adresse eingeben!</string>
 
+    <!-- Login und registrieren -->
     <string name="password">Passwort</string>
     <string name="createaccount">Account erstellen</string>
     <string name="login">Login</string>
     <string name="postal">Deine PLZ</string>
+    <string name="nopw">Bitte ein Passwort eingeben</string>
 </resources>
