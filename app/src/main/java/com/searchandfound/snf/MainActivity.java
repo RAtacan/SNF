@@ -14,9 +14,12 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.searchandfound.snf.Models.AuthenticationResponse;
 import com.searchandfound.snf.Models.EmailResponse;
 import com.searchandfound.snf.Utils.APIBuilder;
 import com.searchandfound.snf.Utils.Helper;
+import com.searchandfound.snf.Utils.Prefs;
+import com.searchandfound.snf.Utils.SearchAndFoundStrings;
 
 import org.apache.http.conn.ConnectTimeoutException;
 
@@ -126,6 +129,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onFailure(Throwable t) {
 
                 Toast.makeText(MainActivity.this,"Please check Internet Connection or Server is down",Toast.LENGTH_SHORT);
+
+            }
+        });
+
+    }
+    @Override
+    public void onResume(){
+
+        super.onResume();
+        String email = Prefs.call(this, SearchAndFoundStrings.EMAIL,null);
+        String password = Prefs.call(this, SearchAndFoundStrings.PASSWORD,null);
+        if(!(email.equals(null)&& password.equals(null))){
+
+            loguser(email,password);
+            emailProgress.setVisibility(View.VISIBLE);
+        }
+    }
+    public void loguser(String email,String password){
+
+        Call<AuthenticationResponse> call = (Call) APIBuilder.getInstance().getService().authenticate(email,password);
+        call.enqueue(new Callback<AuthenticationResponse>() {
+            @Override
+            public void onResponse(Response<AuthenticationResponse> response, Retrofit retrofit) {
+
+                if(response.body().getMeta().getCode() == 200){
+                    emailProgress.setVisibility(View.GONE);
+                    Intent intent = new Intent(MainActivity.this, Homescreen.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+                emailProgress.setVisibility(View.GONE);
 
             }
         });

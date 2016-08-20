@@ -17,4 +17,6 @@
     <string name="login">Login</string>
     <string name="postal">Deine PLZ</string>
     <string name="nopw">Bitte ein Passwort eingeben</string>
+
+    <string name="hello_blank_fragment">Hello</string>
 </resources>

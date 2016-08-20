@@ -133,7 +133,7 @@ public class CheckState extends AppCompatActivity implements View.OnClickListene
                     saveAuth(auth);
                     Intent intent = new Intent(CheckState.this, Homescreen.class);
                     startActivity(intent);
-
+                    finish();
                 } else {
 
                     loginProgress.setVisibility(View.GONE);
@@ -164,6 +164,7 @@ public class CheckState extends AppCompatActivity implements View.OnClickListene
                     Intent intent = new Intent(CheckState.this,CheckState.class);
                     intent.putExtra("checkedEmail",email);
                     startActivity(intent);
+                    finish();
                 }
 
             }
