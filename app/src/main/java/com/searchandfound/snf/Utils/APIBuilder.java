@@ -23,7 +23,7 @@ public class APIBuilder {
 
 
     private static final String PRODUCTION_SCHEMA = "http";
-    private static final String PRODUCTION_HOST = "snfandroid.comli.com";
+    private static final String PRODUCTION_HOST = "searchnfound.16mb.com";
 
 
 

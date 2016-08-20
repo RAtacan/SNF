@@ -16,6 +16,7 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.searchandfound.snf.Models.Authentication;
 import com.searchandfound.snf.Models.AuthenticationResponse;
+import com.searchandfound.snf.Models.RegisterResponse;
 import com.searchandfound.snf.Utils.APIBuilder;
 import com.searchandfound.snf.Utils.Prefs;
 import com.searchandfound.snf.Utils.SearchAndFoundStrings;
@@ -30,7 +31,7 @@ public class CheckState extends AppCompatActivity implements View.OnClickListene
     private String email, password;
     private TextView username;
     private EditText passwordField;
-    private Button loginButton;
+    private Button loginButton, registerrButton;
     private ProgressBar loginProgress;
 
     @Override
@@ -38,9 +39,9 @@ public class CheckState extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            if (bundle.getString("checkedMail") != null) {
+            if (bundle.getString("checkedEmail") != null) {
 
-                email = bundle.getString("checkedMail");
+                email = bundle.getString("checkedEmail");
                 setContentView(R.layout.activity_check_state2);
                 instanciateView(0, email);
 
@@ -60,7 +61,7 @@ public class CheckState extends AppCompatActivity implements View.OnClickListene
 
             username = (TextView) findViewById(R.id.username);
             username.setText(email);
-            loginProgress = (ProgressBar)findViewById(R.id.main_progressBar);
+            loginProgress = (ProgressBar) findViewById(R.id.login_progressbar);
             loginProgress.setVisibility(View.GONE);
             passwordField = (EditText) findViewById(R.id.password);
             loginButton = (Button) findViewById(R.id.loginbutton);
@@ -68,6 +69,29 @@ public class CheckState extends AppCompatActivity implements View.OnClickListene
 
         } else {
 
+            username = (TextView) findViewById(R.id.register_username);
+            loginProgress = (ProgressBar) findViewById(R.id.register_progressbar);
+            loginProgress.setVisibility(View.GONE);
+            passwordField = (EditText) findViewById(R.id.password);
+            registerrButton = (Button) findViewById(R.id.register_weiterbutton);
+            registerrButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(!(username.getText().toString().equals(null) && passwordField.getText().toString().equals(null))){
+
+                        if(passwordField.getText().toString().trim().length() >= 4){
+
+                            registerUser();
+
+                        }else{
+                            Toast.makeText(CheckState.this,"Bitte mehr als 4 Zeichen für das Passwort!",Toast.LENGTH_SHORT);
+                        }
+
+                    }
+
+                }
+            });
 
         }
 
@@ -101,7 +125,7 @@ public class CheckState extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onResponse(Response<AuthenticationResponse> response, Retrofit retrofit) {
 
-                if (response.code() == 200) {
+                if (response.body().getMeta().getCode() == 200) {
                     loginProgress.setVisibility(View.GONE);
                     Authentication auth = response.body().getAuth();
                     Prefs.save(CheckState.this, SearchAndFoundStrings.EMAIL, email);
@@ -121,6 +145,33 @@ public class CheckState extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onFailure(Throwable t) {
 
+
+            }
+        });
+
+    }
+    public void registerUser(){
+
+        Call<RegisterResponse> call = (Call) APIBuilder.getInstance().getService().register(username.getText().toString(),
+                                         passwordField.getText().toString(),email);
+        call.enqueue(new Callback<RegisterResponse>() {
+            @Override
+            public void onResponse(Response<RegisterResponse> response, Retrofit retrofit) {
+
+                if(response.body().getMeta().getCode() == 200){
+                    loginProgress.setVisibility(View.GONE);
+                    String email = response.body().getEmail();
+                    Intent intent = new Intent(CheckState.this,CheckState.class);
+                    intent.putExtra("checkedEmail",email);
+                    startActivity(intent);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+                loginProgress.setVisibility(View.GONE);
 
             }
         });

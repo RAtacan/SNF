@@ -12,7 +12,7 @@ public class Meta {
     @Expose
     int code;
 
-    @SerializedName("Message")
+    @SerializedName("message")
     @Expose
     String message;
 
