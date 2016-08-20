@@ -4,24 +4,23 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by #Chris on 18.08.2016.
+ * Created by #Chris on 20.08.2016.
  */
-public class EmailResponse {
+public class RegisterResponse {
 
     @SerializedName("email")
     @Expose
     private String email;
+
     @SerializedName("meta")
     @Expose
     private Meta meta;
 
-    public String getEmail(){
-
-        return email;
-
-    }
     public Meta getMeta(){
         return meta;
+    }
+    public String getEmail(){
+        return email;
     }
 
 }

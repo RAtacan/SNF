@@ -28,7 +28,7 @@
         android:layout_height="40dp"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/main_email"
+        android:id="@+id/register_username"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="#ffffff"
@@ -38,6 +38,13 @@
         android:paddingBottom="10dp"
         android:layout_below="@+id/postal" />
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_progressbar"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="40dp"
@@ -45,7 +52,8 @@
         android:ems="10"
         android:id="@+id/password"
         android:background="#ffffff"
-        android:layout_below="@+id/main_email"
+        android:layout_below="@+id/register_username"
+        android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:layout_alignLeft="@+id/main_email"
         android:layout_alignStart="@+id/main_email"
@@ -55,13 +63,13 @@
         android:hint="@string/password" />
     <Button
 
-        android:id="@+id/main_weiterbutton"
+        android:id="@+id/register_weiterbutton"
         android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:layout_height="60dp"
         android:layout_width="220dp"
-        android:text="\@string/createaccount" />
+        android:text="@string/createaccount"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -71,7 +79,7 @@
         android:layout_marginTop="25dp"
         android:id="@+id/postal"
         android:textAlignment="center"
-        android:hint="\@string/postal"
+        android:hint="@string/postal"
         android:layout_below="@+id/main_ueberschrift"
         android:layout_centerHorizontal="true"
         android:background="#FFFF" />
